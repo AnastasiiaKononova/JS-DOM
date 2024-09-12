@@ -20,6 +20,9 @@
 
 const button = document.querySelector('button');
 
+button.addEventListener('click', clicker);
+
+
 function clicker(){
     alert('hello, user');
 }
