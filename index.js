@@ -5,7 +5,7 @@
 
 const body = document.body;
 
-body.append(element);
+
 const p = document.createElement('p');
 p.textContent = 'Довільний текст';
 
