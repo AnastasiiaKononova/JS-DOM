@@ -34,6 +34,5 @@ const element = document.createElement('p');  // створюється HTMLPara
 element.textContent = 'PARAGRAPH element';
 element.style.color = 'violet';
 
-const section = document.querySelector('section'); // витягти посилання існуючого на сторінці елементу
-
-section.append(element);
+const body = document.body;
+body.append(element);
