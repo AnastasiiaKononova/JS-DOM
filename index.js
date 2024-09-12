@@ -29,5 +29,11 @@ elem.textContent = 'Click me please'
     Для цього потрібно мати доступ до елемента (батька), який вже є на сторінці
 */
 
-const section = document.querySelector('section');
-section.append(elem)
+const element = document.createElement('p');  // створюється HTMLParagraphElement
+
+element.textContent = 'PARAGRAPH element';
+element.style.color = 'violet';
+
+const section = document.querySelector('section'); // витягти посилання існуючого на сторінці елементу
+
+section.append(element);
