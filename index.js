@@ -18,26 +18,24 @@
 Для того, щоби пояснити браузеру, що ми очікуємо певної події, ми на неї "підписуємось"
 */
 
-const nlistBtn = document.querySelectorAll('button');
+const btn = document.querySelector('button');
 
 
-for (const btn of nlistBtn) {
-    btn.addEventListener('click', clicker);
+const handler = function(event) {
+    console.log(event.target);
+    event.target.removeEventListener('click', handler); /// знімаємо з елемента обробку події
 }
 
+btn.addEventListener('click', handler);
 
 
-function clicker(event){   /* Функція eventHandler - обробник події  */
-    console.dir(event.target);
-    // const para = event.target.parentElement.children[0];
-    const par = document.querySelector('#par-text')
-    par.style.color = 'violet';
-}
 
 
-/* Таска:
-Створити три кнопки. На першій написано "red", на другій "green",  на третій "blue".
-За натиснення на кнопку фоновий колір цієї кнопки має стати таким, як на кнопці написано
+/*
+Підписка на подію повідомляє браузеру, що ми хочемо відреагувати на щось конкретне, якщо і коли воно станеться
+Браузер викликає обробник події та передає йому у аргументи об'єкт події, що сталася
+Для відписки від події мені потрібно повідомити браузеру, що ця подія мені не потрібна.
 */
+
 
 
