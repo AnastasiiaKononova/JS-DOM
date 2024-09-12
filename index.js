@@ -28,9 +28,10 @@ for (const btn of nlistBtn) {
 
 
 function clicker(event){   /* Функція eventHandler - обробник події  */
-    // console.log(event.target.textContent);
-    const text = event.target.textContent;
-    event.target.style.backgroundColor = text;
+    console.dir(event.target);
+    // const para = event.target.parentElement.children[0];
+    const par = document.querySelector('#par-text')
+    par.style.color = 'violet';
 }
 
 
