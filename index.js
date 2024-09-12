@@ -18,14 +18,20 @@
 Для того, щоби пояснити браузеру, що ми очікуємо певної події, ми на неї "підписуємось"
 */
 
-const button = document.querySelector('button');
+const nlistBtn = document.querySelectorAll('button');
 
-button.addEventListener('click', clicker);
+
+for (const btn of nlistBtn) {
+    btn.addEventListener('click', clicker);
+}
+
 
 
 function clicker(event){   /* Функція eventHandler - обробник події  */
-    console.log(event);
- }
+    // console.log(event.target.textContent);
+  console.log(event);
+  event.target.remove()
+}
 
 /*
 Підписка на подію повідомляє браузеру, що ми хочемо відреагувати на щось конкретне, якщо і коли воно станеться
