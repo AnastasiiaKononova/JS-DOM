@@ -19,14 +19,15 @@
 Об'єкти можуть ділитися властивостями та методами зі своїми нащадками за допомогою прототипного наслідування
 */
 
-const articlesHTMLCollection = document.getElementsByTagName('article');
-
-const articlesNodeList = document.querySelectorAll('article');
+const elem = document.createElement('button');
+elem.textContent = 'Click me please'
 
 /*
-HTMLCollection - "жива" колекція.
-При видаленні (або створенні нових елементів) формує актуальний список посилань на елементи (при видаленні буде зі списку видаляти їх, при створенні додавати)
-NodeList - статична колекція, один раз сформований список не зміниться, якщо елементи будуть видалені або додані
-Якщо потрібно оновити список елементів - можна перевикликати querySelectorAll і перестворити NodeList заново
+Створення елементів:
+1. Створити об'єкт потрібного елемента
+2. Вказати батьківському елементу, що цей стане його дитиною
+    Для цього потрібно мати доступ до елемента (батька), який вже є на сторінці
 */
 
+const section = document.querySelector('section');
+section.append(elem)
