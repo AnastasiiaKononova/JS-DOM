@@ -1,34 +1,55 @@
-const showBtn = document.querySelector('#show-modal');
-const closeBtn = document.querySelector('#close-modal');
 
-const section = document.querySelector('.background');
-const modal = document.querySelector('.modal-window');
+/*
+Таска:
+за натиснення на div - збільшувати рахунок і виводити його в article
+за натиснення на батьківський section -  зменшувати рахунок
+Зробити це одним обробником події
+*/
+
+const section = document.querySelector('section');
+const article = document.querySelector('article');
 
 
-function showModal() {
-   
-    section.style.display = 'flex';
-    modal.style.display = 'block';
-}
 
-function closeModal() {
-    section.style.display = 'none';
-    modal.style.display = 'none';
-}
 
-showBtn.addEventListener('click', showModal);
-closeBtn.addEventListener('click', closeModal);
-section.addEventListener('click', closeHandler, true);
+class Game {
+    constructor(scoreElement) {
+       this.count = 0;
+        this.scoreElement = scoreElement
+    }
 
-function closeHandler(event) {
-    if (event.target === event.currentTarget) {
-        closeModal();
+    get count() {
+        return this._count
+    }
+
+    set count(v) {
+        this._count = v;
+    }
+
+    increment() {
+        ++this.count;
+        this.rerender();
+        return this.count;
+    }
+
+    decrement() {
+        --this.count;
+        this.rerender();
+        return this.count;
+    }
+
+    rerender(){
+        this.scoreElement.textContent = this.count;
     }
 }
 
-    function closeHandler(event) {
-        if(event.target === event.currentTarget) {
-            event.stopPropagation();
-            closeModal();
-        }
+section.addEventListener('click', handler);
+const game = new Game(article);
+
+function handler(event) {
+    if(event.target === event.currentTarget) {
+        game.decrement(); 
+    } else {
+        game.increment();
     }
+}
