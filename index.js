@@ -1,36 +1,45 @@
-//  ПОДІЇ
+const body = document.body;
+const section = document.querySelector('section');
+const article = document.querySelector('article');
+const div = document.querySelector('#box');
+
+function handler(event) {
+    console.log('--------------')
+    console.log('currentTarget:', event.currentTarget);
+    console.log('target:', event.target);
+}
+
+body.addEventListener('click', handler);
+
+section.addEventListener('click', handler);
+
+article.addEventListener('click', handler);
+
+div.addEventListener('click', handler);
 
 /*
-Два важливих принципи:
-
-У об'єктів є властивості та методи.
-Об'єкти можуть ділитися властивостями та методами зі своїми нащадками за допомогою прототипного наслідування
-2. На сторінці стаються події
-
-Подія - (англ. event) - це певна дія (зміна чогось), що може відбутись на сторінці.
-Події можуть бути: 
-    - згенерованими користувачем (рухи мишею, клацання, набір тексту на клавіатурі)
-    - станом сторінки
-    - у відповідь на запити на сервер
-Реакція на подію наз. обробкою події.
-
-
-Для того, щоби пояснити браузеру, що ми очікуємо певної події, ми на неї "підписуємось"
+function clicker(event) {
+    if(event.target === event.currentTarget) {
+    console.log('ви натиснули на секцію');
+    } else {
+        console.log('ви натиснули на дів');
+    }
+}
+section.addEventListener('click', clicker)
 */
 
 /*
-Зробити п'ять кнопок, які за натиснення виводять текст, що на них написаний, в консоль і знімають з себе обробку події натиснення
+Три фази події:
+1. Фаза занурення - capturing phase
+Подія стається на рівні операційної системи, передається браузеру, а він починає передавати від елемента до елемента по ієрархії потоку.
+
+2. Фаза цілі - target phase
+Подія досягає найглибше вкладеного за координатами події елемента. Він і є ціллю події (event.target)
+
+3. Фаза всплиття - bubbling phase
+Подія "вспливає" нагору від цілі до браузера назад.
+
+По дефолту обробка подій спрацьовує на фазі всплиття.
+Третій аргумент методу addEventListener - або об'єкт з властивістю capture
+або boolean
 */
-
-const btns = document.querySelectorAll('button');
-
-
-for (const btn of btns) {
-    btn.addEventListener('click', clickHandler)    
-}
-
-function clickHandler(event) {
- //   const {target: btn} = event;
-    console.log(event.target.textContent);
-    event.target.removeEventListener('click', clickHandler)
-}
