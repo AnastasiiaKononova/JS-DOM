@@ -1,45 +1,67 @@
-const body = document.body;
-const section = document.querySelector('section');
+/*
+Створити структуру:
+body -> main -> section -> article
+Задати елементам розміри (різні) і різні фонові кольори
+1. За натиснення на елемент-дитину (article) вивести його назву на консоль
+2. Навісити обробку подій на всі елементи, вивести currentTarget та target у кожному
+3. За допомогою керування подією, зупинити передачу події на main
+4. (навпаки) - зробити, щоб відпрацював handler на article і не відпрацювали всі інші
+*/
+
+//1
 const article = document.querySelector('article');
-const div = document.querySelector('#box');
+const body = document.body;
+const main = document.querySelector('main');
+const section = document.querySelector('section');
 
-function handler(event) {
-    console.log('--------------')
+/*
+article.addEventListener('click', function (event) {
+    console.log(event.target)
+})
+*/
+
+//2
+
+/*
+function clickHandler(event) {
     console.log('currentTarget:', event.currentTarget);
-    console.log('target:', event.target);
+    console.log('target', event.target);
 }
 
-body.addEventListener('click', handler);
+article.addEventListener('click', clickHandler);
+section.addEventListener('click', clickHandler);
+main.addEventListener('click', clickHandler);
+body.addEventListener('click', clickHandler);
+*/
 
-section.addEventListener('click', handler);
-
-article.addEventListener('click', handler);
-
-div.addEventListener('click', handler);
-
+//3 
 /*
-function clicker(event) {
-    if(event.target === event.currentTarget) {
-    console.log('ви натиснули на секцію');
-    } else {
-        console.log('ви натиснули на дів');
+function clickHandler(event) {
+    if (event.currentTarget === main) {
+        event.stopPropagation();
     }
+    console.log('currentTarget:', event.currentTarget);
+    console.log('target', event.target);
 }
-section.addEventListener('click', clicker)
+article.addEventListener('click', clickHandler, true);
+section.addEventListener('click', clickHandler, true);
+main.addEventListener('click', clickHandler, true);
+body.addEventListener('click', clickHandler, true);
 */
 
-/*
-Три фази події:
-1. Фаза занурення - capturing phase
-Подія стається на рівні операційної системи, передається браузеру, а він починає передавати від елемента до елемента по ієрархії потоку.
+///4
 
-2. Фаза цілі - target phase
-Подія досягає найглибше вкладеного за координатами події елемента. Він і є ціллю події (event.target)
+article.addEventListener('click', clickHandler);
+section.addEventListener('click', clickHandler);
+main.addEventListener('click', clickHandler);
 
-3. Фаза всплиття - bubbling phase
-Подія "вспливає" нагору від цілі до браузера назад.
+body.addEventListener('click', clickHandler);
 
-По дефолту обробка подій спрацьовує на фазі всплиття.
-Третій аргумент методу addEventListener - або об'єкт з властивістю capture
-або boolean
-*/
+function clickHandler(event) {
+    if (event.currentTarget === event.target) {
+        event.stopPropagation();
+    }
+    console.log('currentTarget:', event.currentTarget);
+    console.log('target', event.target);
+}
+
