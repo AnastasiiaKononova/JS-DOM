@@ -1,10 +1,10 @@
 
-/*
-Таска:
-за натиснення на div - збільшувати рахунок і виводити його в article
-за натиснення на батьківський section -  зменшувати рахунок
-Зробити це одним обробником події
-*/
+// /*
+// Таска:
+// за натиснення на div - збільшувати рахунок і виводити його в article
+// за натиснення на батьківський section -  зменшувати рахунок
+// Зробити це одним обробником події
+// */
 
 const section = document.querySelector('section');
 const article = document.querySelector('article');
@@ -43,13 +43,29 @@ class Game {
     }
 }
 
+/*
+
 section.addEventListener('click', handler);
 const game = new Game(article);
 
-function handler(event) {
-    if(event.target === event.currentTarget) {
-        game.decrement(); 
-    } else {
-        game.increment();
-    }
+// function handler(event) {
+//     if(event.target === event.currentTarget) {
+//         game.decrement(); 
+//     } else {
+//         game.increment();
+//     }
 }
+
+
+/*
+За натиснення в батьківському елементі в article замість лічильника вивести координати натиснення
+X: 64
+Y: 25
+*/
+
+section.addEventListener('click', function(event){
+    article.textContent = `X: ${event.clientX}, Y: ${event.clientY}`
+})
+
+
+
