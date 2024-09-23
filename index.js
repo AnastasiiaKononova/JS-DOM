@@ -1,10 +1,7 @@
-const menuContainer = document.querySelector('.menu-container');
-const menu = document.querySelector('.side-menu');
+//Data-* атрибути 
+const btns = document.querySelectorAll('button');
+btns[0].addEventListener('click', function(event) {
+    console.dir(event.target.dataset.userInfo);
+    event.target.dataset.newAttr = 'new value for element'
+})
 
-// За натиснення на іконку гамбургера, змінювати стан бічного меню. Іконка має його закривати
-
-menuContainer.addEventListener('click', function(event) {
-    event.stopPropagation();
-    event.currentTarget.classList.toggle('change');
-    menu.classList.toggle('show');
-}, true);
