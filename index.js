@@ -1,59 +1,51 @@
-const form = document.querySelector('form');
+"use strict";
+const user = {
+  firstName: "Test1",
+  lastName: "Testovich1",
+  age: 28,
+  photoSrc: "https://sigc.edu/sigc/ad-sigc/datas/images/userimg.jpg",
+};
 
-const inputFirstName = document.querySelector('input[name="firstName"]');
-inputFirstName.addEventListener('change', function({target}) {
-  
-    if(validateName(target.value)){
-        target.classList.remove('invalid');
-       target.classList.add('valid')
-    } else {
-        target.classList.add('invalid')
-    }
-})
-function validateName(value) {
-    return !(value.includes('@') || value.includes('!')) 
+// 1 + Створити елемент
+// 3 ~ Задати значення атрибутам
+// 4 ~ Додати класи
+// 5 ~ Додати контент
+// 6 ~ додати обробник на подію
+// 2 + Вбудувати на потрібне місце
+
+    const userCardEl = document.createElement("article");
+userCardEl.classList.add("userCard");
+document.body.append(userCardEl);
+
+const userImg = document.createElement("img");
+userImg.src = user.photoSrc;
+userImg.alt = `${user.firstName} ${user.lastName}`;
+userImg.classList.add("userImg");
+userCardEl.append(userImg);
+
+const userInfoEl = document.createElement("div");
+userInfoEl.classList.add("userInfo");
+userCardEl.append(userInfoEl);
+
+const userNameEl = document.createElement("p");
+userNameEl.classList.add("userName");
+userNameEl.textContent = `${user.firstName} ${user.lastName}`;
+userInfoEl.append(userNameEl);
+
+const userAgeEl = document.createElement("span");
+userAgeEl.classList.add("userAge");
+userAgeEl.textContent = user.age;
+userInfoEl.append(userAgeEl);
+
+const trashIcon = document.createElement("i");
+trashIcon.classList.add("fa-solid");
+trashIcon.classList.add("fa-trash");
+trashIcon.classList.add("trashIcon");
+
+function deleteUser(e) {
+  // userCardEl.remove();
+  // e.target.parentElement.remove();
+  e.target.closest(".userCard").remove();
 }
-
-
-/*
-<form> за замовчуванням має специфічну поведінку - вона перезавантажує сторінку, намагаючись самостійно відправити дані туди, куди вказує атрибут action
-*/
-
-form.addEventListener('submit', function(event){
-    // потрібно зупинити поведінку за замовчуванням!
-    event.preventDefault(); // виклик методу зупиняє поведінку за-замовчуванням
-    
-    const form = event.target;
-    if (validateData(form.pass.value, form.passRepeat.value)) {
-        submitDataToServer(form);
-    } else {
-        createErrorMessage(form)
-    }
-})
-function validateData(inputValue1, inputValue2) {
-    return inputValue1 === inputValue2
-}
-function submitDataToServer({firstName, lastName, email, pass, passRepeat, birthday, agreement}){
-    const userObj = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        password: pass.value,
-        birthday: birthday.value,
-        agree: agreement.checked
-    }
-    console.log(userObj); // відправляємо дані на сервер
-}
-
-function createErrorMessage(form) {
-    const errorMessage = document.createElement('p');
-    errorMessage.classList.add('error-text');
-    errorMessage.textContent = 'Password must be the same';
-    form.append(errorMessage);
-}
-    
-
-/*
-1. Додати мінімум стилів, прописати пояснення до кожного інпута, що це інформація
-2. За відправки форми вивести в консоль об'єкт зі всією введеною інформацією користувача
-*/
+trashIcon.onclick = deleteUser;
+userCardEl.append(trashIcon);
