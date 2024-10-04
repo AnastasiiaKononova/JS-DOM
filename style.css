@@ -1,62 +1,43 @@
-* {
-    box-sizing: border-box;
+body {
+    display: flex;
+    height: 98vh;
+    justify-content: center;
+    align-items: center;
   }
   
-  .todoContainer {
+  form {
+    width: 20vw;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    min-width: 320px;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    border: 1px solid black;
+    padding: 3%;
   }
   
-  .todoContainer h2 {
-    text-align: center;
+  form * {
+    margin: 2% 0;
   }
   
-  .todoForm {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid grey;
-    background-color: lightgray;
-    padding: 30px;
-  }
-  
-  .todoForm input {
-    width: 70%;
-  }
-  .todoListItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px;
-  }
-  
-  .todoListItem + .todoListItem {
-    border-top: 1px solid grey;
-  }
-  
-  .todoListItem button {
-    margin-left: auto;
-  }
-  
-  input {
-    outline: none;
+  .error-text {
+    color: red;
+    font-size: 1em;
+    font-weight: bold;
   }
   
   .valid {
-    background-color: aquamarine;
+    background-color: lightgreen;
   }
   
   .invalid {
     background-color: lightcoral;
   }
-  
-  .doneTask {
-    text-decoration: 1px line-through lightgray;
-    color: grey;
+  .input-wrapper{
+    position: relative;
+  }
+  .pass-icon {
+    position: absolute;
+    top: 0;
+    left: 80%;
+    cursor: pointer;
+    z-index: 2;
   }

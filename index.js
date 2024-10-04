@@ -1,53 +1,68 @@
-'use strict';
+const form = document.querySelector('form');
+const inputFirstName = document.querySelector('input[name="firstName"]');
 
-const todoForm = document.querySelector('.todoContainer>form');
-const todoInput = document.querySelector('.todoContainer input');
-const todoList = document.querySelector('.todoList');
 
-const TODO_REX_EXP = /^\s*$/;
+inputFirstName.addEventListener('change', function({target}) {
 
-todoInput.oninput = ({ target }) => {
-  if (!TODO_REX_EXP.test(target.value)) {
-    target.classList.add('valid');
-    target.classList.remove('invalid');
-  } else {
-    target.classList.remove('valid');
-    target.classList.add('invalid');
-  }
-};
+    if(validateName(target.value)){
+        target.classList.remove('invalid');
+       target.classList.add('valid')
+    } else {
+        target.classList.add('invalid')
+    }
+})
 
-todoForm.onsubmit = e => {
-  e.preventDefault();
-  const todoItem = e.target.elements['todo-item'];
-  if (!TODO_REX_EXP.test(todoItem.value)) {
-    todoList.append(createTodoItem(todoItem.value));
-    todoItem.value = '';
-    todoItem.classList.remove('valid');
-  } else {
-    todoItem.classList.add('invalid');
-  }
-};
 
-function createTodoItem(value) {
-  const todoListItem = document.createElement('li');
-  todoListItem.classList.add('todoListItem');
-
-  const delBtn = document.createElement('button');
-  delBtn.textContent = 'X';
-  delBtn.onclick = ({ target }) => {
-    target.parentElement.remove();
-  };
-
-  const isDoneEl = document.createElement('input');
-  isDoneEl.type = 'checkbox';
-  isDoneEl.onchange = ({ target }) => {
-    target.nextSibling.classList.toggle('doneTask');
-  };
-
-  const todoValue = document.createElement('span');
-  todoValue.textContent = value;
-
-  todoListItem.append(isDoneEl, todoValue, delBtn);
-
-  return todoListItem;
+function validateName(value) {
+    return !(value.includes('@') || value.includes('!')) 
 }
+
+/*
+<form> за замовчуванням має специфічну поведінку - вона перезавантажує сторінку, намагаючись самостійно відправити дані туди, куди вказує атрибут action
+*/
+
+form.addEventListener('submit', function(event){
+    // потрібно зупинити поведінку за замовчуванням!
+    event.preventDefault(); // виклик методу зупиняє поведінку за-замовчуванням
+    const form = event.target;
+    if (validateData(form.pass.value, form.passRepeat.value)) {
+        submitDataToServer(form);
+    } else {
+        createErrorMessage(form)
+    }
+})
+
+function validateData(inputValue1, inputValue2) {
+    return inputValue1 === inputValue2
+}
+
+
+function submitDataToServer({firstName, lastName, email, pass, passRepeat, birthday, agreement}){
+    const userObj = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: pass.value,
+        birthday: birthday.value,
+        agree: agreement.checked
+    }
+       console.log(userObj); // відправляємо дані на сервер
+}
+
+
+function createErrorMessage(form) {
+        const errorMessage = document.createElement('p');
+        errorMessage.classList.add('error-text');
+        errorMessage.textContent = 'Password must be the same';
+        form.append(errorMessage);
+}
+
+const icon = document.querySelector('.pass-icon');
+const passInput = document.querySelector('input[name="pass"]');
+icon.addEventListener('click', function() {
+    if (passInput.type === "password") {
+        passInput.type = "text";
+    } else {
+        passInput.type = "password";
+    }
+})
