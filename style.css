@@ -1,43 +1,62 @@
 * {
     box-sizing: border-box;
-    font-size: 20px;
   }
-  body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  h2 {
-    text-align: center;
-  }
-  form {
+  
+  .todoContainer {
     display: flex;
     flex-direction: column;
+    gap: 15px;
     min-width: 320px;
     width: 100%;
     max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
   }
-  label {
-    width: 100%;
+  
+  .todoContainer h2 {
+    text-align: center;
+  }
+  
+  .todoForm {
     display: flex;
-    gap: 10px;
     justify-content: space-between;
+    border: 1px solid grey;
+    background-color: lightgray;
+    padding: 30px;
+  }
+  
+  .todoForm input {
+    width: 70%;
+  }
+  .todoListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     padding: 10px;
   }
+  
+  .todoListItem + .todoListItem {
+    border-top: 1px solid grey;
+  }
+  
+  .todoListItem button {
+    margin-left: auto;
+  }
+  
   input {
-    width: 40%;
     outline: none;
   }
-  /* input:valid {
-    border: 2px solid green;
-  }
-  input:invalid {
-    border: 2px solid red;
-  } */
+  
   .valid {
-    border: 2px solid green;
+    background-color: aquamarine;
   }
+  
   .invalid {
-    border: 2px solid red;
+    background-color: lightcoral;
+  }
+  
+  .doneTask {
+    text-decoration: 1px line-through lightgray;
+    color: grey;
   }
