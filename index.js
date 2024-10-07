@@ -1,45 +1,28 @@
-/* JSON - JavaScript Object Notation */
-const obj = {
-    firstName: 'John',
-    lastName: 'Lennon',
-    age: 25,
-    email: 'john@beatles.com',
-    isMale: true,
-    isAgreeWithRules: undefined,
-    sayHello: function() {},
-    [Symbol()]: 'symbol value',
-    phones: [4392874928734, 987497324],
-    friends: {
-        name: 'Jane',
-        lastName: 'Doe'
-    },
-    isSelected: null
-}
-console.log(obj);
+const button = document.querySelector('button');
+
+// button.addEventListener('click', function() {
+//     console.log('FOREVER LOOP')
+//     while(true){}
+//     console.log('button clicked')
+// });
 
 /*
-JSON - формат, який дозволяє перетворювати js-об'єкти у текстові дані
-Процес перетворення об'єкту в текст (в JSON) називається серіалізація
-У форматі JSON доступні:
-- об'єкти
-- масиви
-- змінні:
-    - string (в подвійних лапках)
-    - number
-    - boolean
-    - null
-    У форматі JSON не має бути висячої коми
+JS однопоточний - одна задача за один раз
+Асинхронний JavaScript
 */
 
-const str = JSON.stringify(obj); // серіалізація
+button.addEventListener('click', function() {
+        
+    console.log('button clicked')
+});
 
-const invalidStr = "firstName: 'John'";
-
-/// Зворотній процес: десеріалізація
+console.log('Javascript working');
 
 
-JSON.parse(str); // отримуємо валідний JSON, перетворюємо його в js-об'єкт
-
-//JSON.parse(invalidStr); // SyntaxError
-
-console.log(str);
+    /// EventLoop - цикл подій - це программа, частина браузера, яка є диспетчером асинхронних процесів
+    /*
+    до асинхронних задач належать:
+        - обробники подій
+        - запити на сервер
+        - відкладені у часі задачі (timeout, interval)
+    */
