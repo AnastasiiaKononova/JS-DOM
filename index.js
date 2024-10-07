@@ -37,18 +37,11 @@ setTimeout(fn, time) - приймає посилання на функцію і 
 Час отстрочки - МІНІМАЛЬНИЙ ЧАС, оскільки через цей вказаний проміжок часу задача буде переміщена у чергу коллбеків і буде чекати на виконання, коли стек буде пустим. 
 */
 
-const btn = document.querySelector('button');
-btn.addEventListener('click', function onClick() {
-    setTimeout(function timer() {
-        console.log('You clicked the button!');    
-    }, 2000);
-});
-console.log("Hi!");
-setTimeout(function timeout() {
-    console.log("timer!");
-}, 5000);
-console.log("Welcome to loupe.");
-for(let i=0; i< 1000000000; i++){
-    
+function tick() {
+    console.log('tick');
 }
-console.log('hard loop end');
+
+const res = setTimeout(tick, 5000);
+// res - ідентифікатор таймаута, повертається одразу
+
+clearTimeout(res); // очистка timeout, тобто відміна виконання задачі, відкладеної у часі
