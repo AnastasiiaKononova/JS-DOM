@@ -37,29 +37,41 @@ const myfirstPromise = new Promise(executor);  // Error: Promise need an executo
 function executor(resolve, reject){
     const superImportantData = 'hello world';
 //    resolve(superImportantData); // --> мій проміс успішно завершився, тепер він має статус fullfiled, виконається перший коллбек then-a
-    reject('Oooops'); // -> мій проміс отримав статус rejected і виконається другий коллбек then-а
+//     reject('Oooops'); // -> мій проміс отримав статус rejected і виконається другий коллбек then-а
 }
-console.log(myfirstPromise);
-myfirstPromise.then(function(data) {
-    console.log('MY PROMISE OK');
-    console.log(`PROMISE DATA is: ${data}`);
-}, function(error){
-    console.log('MY PROMISE NOT OK');
-    console.log('error message', error);
-});
+// console.log(myfirstPromise);
+// myfirstPromise.then(function(data) {
+//     console.log('MY PROMISE OK');
+//     console.log(`PROMISE DATA is: ${data}`);
+// }, function(error){
+//     console.log('MY PROMISE NOT OK');
+//     console.log('error message', error);
+// });
 /*
 Створити свій власний проміс, який на основі рандому в половині випадків буде успішний, в половині - відхилений
 і навісити обробку проміса, яка виводить на консоль результат роботи (або успішність, або неуспішність)
 */
-const catShrodinger = new Promise(function(res, rej){
-    if (Math.random() > 0.5){
-        res(); // promise resolved
-    } else {
-        rej(); // promise rejected
-    }
+
+setTimeout(()=>{
+    console.log('timer!')
+},0);
+setTimeout(()=>{
+    console.log('second timer')
+},0);
+const promise = new Promise(function(res, rej){
+    res('promise ok')
 });
-catShrodinger.then(function(){
-    console.log('cat is alive')
-}, function(){
-    console.log('cat is dead')
+
+promise.then(function(promiseValue){
+    console.log(promiseValue);
+    return 'second promise'; // then -> new Promise()
+}).then(function(data){
+    console.log(data);
+    return 'third promise'; // then -> new Promise()
+}).then(function(anotherData){
+    console.log(anotherData);
 })
+/*
+Коли інтерпретатор коду зустрічає створення проміса, він його створює зі статусом pending і намагається виконати функцію-executor
+Promise handling (then callback) - microtask. Вони виконуються (всі!) першими, тільки після того - одна макро-таска
+*/
