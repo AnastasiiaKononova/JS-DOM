@@ -6,15 +6,24 @@ Promise - особливий об'єкт, який використовуєть�
 З нього переходить в 
 або fullfiled (успішно виконаний) - resolved
 або rejected (відхилений, помилка)
+Окрім статуса, проміс несе в собі дані
 Проміс - одноразовий, він змінює стан тільки один раз
 */
 
 const res = fetch('https://randomuser.me/api/'); // синхронно створюється об'єкт Promise
 // console.log(res);
-res.then(function(){
-    console.log('my request was good')
-}, function() {
-    console.log('my request was bad')
+
+res
+.then(function(data){
+    console.log('my request was good');
+    return 5;
+}, function(error) {
+    console.log('my request was bad');
+    console.log(error);
+})
+.then(function(promiseData){
+    console.log(promiseData)
+}, function(){
 })
 /*
 setTimeout, setInterval, addEventListener - macrotasks
