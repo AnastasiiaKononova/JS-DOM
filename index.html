@@ -7,24 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="./reset.css"> -->
     <link rel="stylesheet" href="style.css">
-    <script src="data.js" defer></script>
-    <script src="index.js" defer></script>
+    <script src="dataFetching.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
-  <section class="weather-menu">
-    <form>
-      <h3>Current weather today in:</h3>
-      <select name="city">
-        <option value="Dnipro">Dnipro</option>
-        <option  value="Kyiv">Kyiv</option>
-        <option value="Lviv">Lviv</option>
-        <option value="Odesa">Odesa</option>
-      </select>
-      <button>Submit</button>
-    </form>
-  </section>
-  <div id="root"></div>
+  <article class="weather">
+    <p class="temp"></p>
+  </article>
 </body>
 
